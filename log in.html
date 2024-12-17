@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <!-- Google Fonts for a modern font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 0 20px;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .login-container:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        .login-container h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            color: #333;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #2575fc;
+            background-color: #fff;
+            box-shadow: 0 0 8px rgba(37, 117, 252, 0.4);
+        }
+
+        .input-group .eye-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 22px;
+            color: #555;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #6a11cb;
+            transform: translateY(-2px);
+        }
+
+        .login-btn:active {
+            transform: translateY(1px);
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            display: none;
+            margin-top: 10px;
+            background-color: rgba(255, 0, 0, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .forgot-password {
+            display: block;
+            margin-top: 15px;
+            color: #2575fc;
+            font-size: 14px;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .forgot-password:hover {
+            color: #6a11cb;
+            text-decoration: underline;
+        }
+
+        .popup-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f44336;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            display: none;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .popup-message.show {
+            display: block;
+            animation: showMessage 0.5s ease-out;
+        }
+
+        @keyframes showMessage {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px;
+                max-width: 100%;
+            }
+
+            .login-container h2 {
+                font-size: 24px;
+            }
+
+            .input-group input {
+                padding: 12px;
+                font-size: 15px;
+            }
+
+            .login-btn {
+                font-size: 14px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="#" method="POST" id="loginForm">
+            <div class="input-group">
+                <label for="delos_santos25">Username</label>
+                <input type="text" id="delos_santos25" name="delos_santos25" required>
+            </div>
+            <div class="input-group">
+                <label for="johnmark25">Password</label>
+                <input type="password" id="johnmark25" name="johnmark25" required>
+                <span class="eye-icon" id="eye-icon">&#128065;</span> <!-- Eye icon -->
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+        <a href="#" class="forgot-password">Forgot Password?</a>
+    </div>
+
+    <!-- Popup Message -->
+    <div class="popup-message" id="popup-message">Wrong username or password</div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const popupMessage = document.getElementById('popup-message');
+        const eyeIcon = document.getElementById('eye-icon');
+        const passwordField = document.getElementById('johnmark25');
+
+        // Hardcoded credentials
+        const correctUsername = "delos_santos25";
+        const correctPassword = "johnmark25";
+
+        // Toggle password visibility
+        eyeIcon.addEventListener('click', function() {
+            const type = passwordField.type === 'password' ? 'text' : 'password';
+            passwordField.type = type;
+
+            // Toggle the eye icon (you can use a different icon for visibility change)
+            eyeIcon.innerHTML = type === 'password' ? '&#128065;' : '&#128064;';
+        });
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('delos_santos25').value;
+            const password = document.getElementById('johnmark25').value;
+
+            // Validate username and password
+            if (username === correctUsername && password === correctPassword) {
+                // Redirect if credentials are correct
+                window.location.href = 'file:///C:/Users/anton/OneDrive/Desktop/johnmark_com6/main.html';
+            } else {
+                // Show the popup message if credentials are incorrect
+                popupMessage.classList.add('show');
+
+                // Hide the popup after 3 seconds
+                setTimeout(() => {
+                    popupMessage.classList.remove('show');
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
